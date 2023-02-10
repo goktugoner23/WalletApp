@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WalletApp</string>
+
+    <string-array name="income_categories">
+        <item>Salary</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="expense_categories">
+        <item>Food</item>
+        <item>Entertainment</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>
