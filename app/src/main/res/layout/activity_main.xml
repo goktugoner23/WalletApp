@@ -28,15 +28,17 @@
 
         <Button
                 android:id="@+id/reset_database_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Reset database"
                 android:layout_gravity="center_vertical" />
 
         <Button
                 android:id="@+id/budget_history_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Budget History"
                 android:layout_gravity="center_vertical" />
     </LinearLayout>
@@ -51,14 +53,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add Income"/>
+                android:text="Add Income"
+                style="@style/IncomeButtonStyle"/>
 
         <Button
                 android:id="@+id/add_expense_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add Expense"/>
+                android:text="Add Expense"
+                style="@style/ExpenseButtonStyle"/>
+
 
     </LinearLayout>
 

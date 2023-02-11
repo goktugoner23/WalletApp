@@ -11,4 +11,8 @@
         <item>Entertainment</item>
         <item>Other</item>
     </string-array>
+
+    <!-- check whether the date string is empty or not -->
+    <string name="income_date">Choose Date</string>
+    <string name="expense_date">Choose Date</string>
 </resources>

@@ -43,15 +43,25 @@ public class AddIncomeActivity extends AppCompatActivity {
         String dateString = incomeDateTextView.getText().toString();
         String categoryString = incomeCategorySpinner.getSelectedItem().toString();
 
-        if (amountString.isEmpty() || dateString.isEmpty()) {
-            Toast.makeText(AddIncomeActivity.this, "Please fill in the amount and date!", Toast.LENGTH_SHORT).show();
+        if (amountString.isEmpty()) {
+            Toast.makeText(AddIncomeActivity.this, "Please fill in the amount!", Toast.LENGTH_SHORT).show();
             return;
         }
-        double amount = Double.parseDouble(amountString);
-        WalletDB db = new WalletDB(AddIncomeActivity.this);
-        db.addTransaction(amount, dateString, "income", categoryString);
 
-        Toast.makeText(AddIncomeActivity.this, "Income added!", Toast.LENGTH_SHORT).show();
-        finish();
+        if (dateString.isEmpty() || dateString.equals(getString(R.string.income_date))) {
+            Toast.makeText(AddIncomeActivity.this, "Please select a date!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            double amount = Double.parseDouble(amountString);
+            WalletDB db = new WalletDB(this);
+            db.addTransaction(amount, dateString, "income", categoryString);
+            Toast.makeText(AddIncomeActivity.this, "Income added!", Toast.LENGTH_SHORT).show();
+            finish();
+        } catch (NumberFormatException e) {
+            Toast.makeText(AddIncomeActivity.this, "Please enter a valid amount!", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
