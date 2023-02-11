@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries, "");
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         dataSet.setValueTextColor(Color.WHITE);
-        dataSet.setValueTextSize(15f);
+        dataSet.setValueTextSize(20f);
         dataSet.setSliceSpace(3f);
 
         PieData data = new PieData(dataSet);
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-        dataSet.setValueTextSize(14f);
+        dataSet.setValueTextSize(20f);
         dataSet.setValueTextColor(Color.BLACK);
         PieData data = new PieData(dataSet);
         mPieChart.setData(data);
