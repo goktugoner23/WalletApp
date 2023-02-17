@@ -51,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AddExpenseActivity.class);
             startActivity(intent);
         });
-
+        //budget history activity
+        Button budgetHistoryButton = findViewById(R.id.budget_history_button);
+        budgetHistoryButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, BudgetHistoryActivity.class);
+            startActivity(intent);
+        });
         //reset database if needed
         Button resetButton = findViewById(R.id.reset_database_button);
         resetButton.setOnClickListener(view -> {

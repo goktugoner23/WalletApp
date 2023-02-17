@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <!-- TableLayout for the column headers -->
+    <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
+
+        <TableRow
+                android:id="@+id/column_headers_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darkblue">
+
+            <TextView
+                    android:id="@+id/date_column_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Date"
+                    android:textColor="@android:color/white"
+                    android:gravity="center" />
+
+            <TextView
+                    android:id="@+id/category_column_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Category"
+                    android:textColor="@android:color/white"
+                    android:gravity="center" />
+
+            <TextView
+                    android:id="@+id/amount_column_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Amount"
+                    android:textColor="@android:color/white"
+                    android:gravity="center" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <!-- Total budget header -->
+    <TableRow
+            android:id="@+id/budget_history_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/table_layout"
+            android:background="@color/darkblue">
+
+        <TextView
+                android:id="@+id/total_budget_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Total Budget"
+                android:textColor="@android:color/white" />
+
+        <TextView
+                android:id="@+id/total_budget_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="0.00"
+                android:textColor="@android:color/white"
+                android:textAlignment="viewEnd" />
+
+    </TableRow>
+
+    <!-- ListView for the transaction history -->
+    <ListView
+            android:id="@+id/transactions_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/budget_history_header" />
+
+</RelativeLayout>
