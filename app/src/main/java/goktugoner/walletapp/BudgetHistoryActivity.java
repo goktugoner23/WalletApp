@@ -1,9 +1,11 @@
 package goktugoner.walletapp;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.SimpleCursorAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BudgetHistoryActivity extends AppCompatActivity {
@@ -41,5 +43,21 @@ public class BudgetHistoryActivity extends AppCompatActivity {
             return false;
         });
         transactionList.setAdapter(adapter);
+        //show the total budget from mainactivity.java
+        updateBudget();
+    }
+
+    @SuppressLint("DefaultLocale")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateBudget();
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void updateBudget(){
+        TextView budgetText = findViewById(R.id.total_budget_value);
+        // Set the text of the TextView to the budget value
+        budgetText.setText(String.format("%.2f", MainActivity.totalBudget));
     }
 }

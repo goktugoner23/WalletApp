@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //I'm declaring this as public because we gonna use it on budgethistoryactivity.java too
+    public static float totalBudget = 0f;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         // load budget and expenses data
         float income = loadIncome();
         float expenses = loadExpenses();
-        budgetTextView.setText("Budget: $" + (income - expenses));
+        totalBudget = income - expenses;
+        budgetTextView.setText("Budget: $" + totalBudget);
         // setup pie chart
         setupPieChart(income, expenses);
         Button addIncomeButton = findViewById(R.id.add_income_button);
@@ -55,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         Button budgetHistoryButton = findViewById(R.id.budget_history_button);
         budgetHistoryButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, BudgetHistoryActivity.class);
+            //pass the total budget at start
+            intent.putExtra("budget", totalBudget);
             startActivity(intent);
         });
         //reset database if needed
@@ -65,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
+    //update pie chart if the user enters a new income or expense data
     protected void onResume() {
         super.onResume();
         updatePieChart(loadIncome(), loadExpenses());
@@ -110,13 +114,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupPieChart(float income, float expenses) {
         PieChart pieChart = findViewById(R.id.pie_chart);
-
+        //get rid of the description label because it annoys me too much
+        pieChart.getDescription().setEnabled(false);
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         if (income == 0.0f && expenses == 0.0f) {
             entries.add(new PieEntry((float) 100.0, "Enter your budget info"));
         } else {
-            entries.add(new PieEntry(income - expenses, "Income"));
+            entries.add(new PieEntry(totalBudget, "Income"));
             entries.add(new PieEntry(expenses, "Expenses"));
         }
 
@@ -133,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         pieChart.notifyDataSetChanged();
     }
 
+    @SuppressLint("SetTextI18n")
     private void updatePieChart(float income, float expenses) {
         PieChart mPieChart = findViewById(R.id.pie_chart);
         List<PieEntry> pieEntries = new ArrayList<>();
@@ -140,12 +146,15 @@ public class MainActivity extends AppCompatActivity {
         pieEntries.add(new PieEntry(expenses, "Expenses"));
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.rgb("#25D366"), ColorTemplate.rgb("#FF0000"));
         dataSet.setValueTextSize(20f);
         dataSet.setValueTextColor(Color.BLACK);
         PieData data = new PieData(dataSet);
         mPieChart.setData(data);
         mPieChart.invalidate();
+        //update budget textview to show the new budget
+        TextView budgetTextView = findViewById(R.id.budget_text_view);
+        budgetTextView.setText("Budget: $" + (income - expenses));
     }
 
     public void resetDatabase(View view) {

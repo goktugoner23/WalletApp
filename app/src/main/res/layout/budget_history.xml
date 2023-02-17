@@ -3,11 +3,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <!-- Total budget header -->
+    <TableRow
+            android:id="@+id/budget_history_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darkblue">
+
+        <TextView
+                android:id="@+id/total_budget_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Total Budget"
+                android:textColor="@android:color/white" />
+
+        <TextView
+                android:id="@+id/total_budget_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="0.00"
+                android:textColor="@android:color/white"
+                android:textAlignment="viewEnd" />
+
+    </TableRow>
+
     <!-- TableLayout for the column headers -->
     <TableLayout
             android:id="@+id/table_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/budget_history_header"
             android:stretchColumns="*"
             android:shrinkColumns="*">
 
@@ -51,40 +80,11 @@
 
     </TableLayout>
 
-    <!-- Total budget header -->
-    <TableRow
-            android:id="@+id/budget_history_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/table_layout"
-            android:background="@color/darkblue">
-
-        <TextView
-                android:id="@+id/total_budget_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="Total Budget"
-                android:textColor="@android:color/white" />
-
-        <TextView
-                android:id="@+id/total_budget_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="8dp"
-                android:text="0.00"
-                android:textColor="@android:color/white"
-                android:textAlignment="viewEnd" />
-
-    </TableRow>
-
     <!-- ListView for the transaction history -->
     <ListView
             android:id="@+id/transactions_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/budget_history_header" />
+            android:layout_below="@+id/table_layout" />
 
 </RelativeLayout>
