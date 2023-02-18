@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         budgetHistoryButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, BudgetHistoryActivity.class);
             //pass the total budget at start
-            intent.putExtra("budget", totalBudget);
+            intent.putExtra("totalBudget", totalBudget);
             startActivity(intent);
         });
         //reset database if needed
@@ -70,10 +70,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //update pie chart if the user enters a new income or expense data
+
+    @SuppressLint("SetTextI18n")
     protected void onResume() {
         super.onResume();
+        //update pie chart if the user enters a new income or expense data
         updatePieChart(loadIncome(), loadExpenses());
+        //update budget textview to show the new budget
+        TextView budgetTextView = findViewById(R.id.budget_text_view);
+        //update the totalbudget again
+        totalBudget = loadIncome() - loadExpenses();
+        budgetTextView.setText("Budget: $" + (totalBudget));
     }
     private float loadIncome() {
         WalletDB db = new WalletDB(this);
@@ -152,9 +159,6 @@ public class MainActivity extends AppCompatActivity {
         PieData data = new PieData(dataSet);
         mPieChart.setData(data);
         mPieChart.invalidate();
-        //update budget textview to show the new budget
-        TextView budgetTextView = findViewById(R.id.budget_text_view);
-        budgetTextView.setText("Budget: $" + (income - expenses));
     }
 
     public void resetDatabase(View view) {

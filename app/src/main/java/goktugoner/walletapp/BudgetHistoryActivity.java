@@ -15,11 +15,16 @@ public class BudgetHistoryActivity extends AppCompatActivity {
     SimpleCursorAdapter adapter;
     String[] fromColumns = {WalletDB.COLUMN_DATE, WalletDB.COLUMN_CATEGORY, WalletDB.COLUMN_AMOUNT, WalletDB.COLUMN_TYPE};
     int[] toViews = {R.id.textViewDate, R.id.textViewCategory, R.id.textViewAmount};
+    float totalBudget;
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_history);
+
+        // Retrieve the totalBudget value from the Intent extras
+        totalBudget = getIntent().getFloatExtra("totalBudget", MainActivity.totalBudget);
 
         transactionList = findViewById(R.id.transactions_list_view);
         walletDB = new WalletDB(this);
@@ -43,21 +48,14 @@ public class BudgetHistoryActivity extends AppCompatActivity {
             return false;
         });
         transactionList.setAdapter(adapter);
-        //show the total budget from mainactivity.java
-        updateBudget();
     }
 
     @SuppressLint("DefaultLocale")
     @Override
     protected void onResume() {
         super.onResume();
-        updateBudget();
-    }
-
-    @SuppressLint("DefaultLocale")
-    private void updateBudget(){
+        // Update the budget text with the retrieved value
         TextView budgetText = findViewById(R.id.total_budget_value);
-        // Set the text of the TextView to the budget value
         budgetText.setText(String.format("%.2f", MainActivity.totalBudget));
     }
 }
